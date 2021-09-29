@@ -2,7 +2,9 @@ package com.hilbing.notificationdemo
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,10 +30,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayNotification(){
-
-
-
         val notificationId = 45
+        val tapResultIntent = Intent(this, SecondActivity::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            tapResultIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
         val notification = NotificationCompat.Builder(this@MainActivity, channelId)
             .setContentTitle("Demo Title")
             .setContentText("This is a demo notification")
